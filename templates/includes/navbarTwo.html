@@ -1,0 +1,70 @@
+{% load static %}
+<header class="header-style-1">
+
+    <!-- ============================================== TOP MENU ============================================== -->
+    <div class="top-bar animate-dropdown">
+      <div class="container">
+        <div class="header-top-inner">
+          <div class="cnt-account">
+            <ul class="list-unstyled">
+
+              {% if request.user.is_anonymous %}
+            <li class="login"><a href="{% url 'login' %}"><span>Login</span></a></li>
+            <li class="login"><a href="{% url 'register' %}"><span>Register</span></a></li>
+            {% else %}
+            <li class="myaccount"><a href="{% url 'dashboard' %}"><span>My Account</span></a></li>
+            <li class="login"><a href="{% url 'logout' %}"><span>Logout</span></a></li>
+            {% endif %}
+            </ul>
+          </div>
+          <!-- /.cnt-account -->
+
+          <div class="cnt-block">
+            <ul class="list-unstyled list-inline">
+
+              <li class="dropdown dropdown-small lang">
+            <a href="#" class="dropdown-toggle" data-hover="dropdown" data-toggle="dropdown">
+              <span class="value">Language </span><b class="caret"></b>
+            </a>
+            <ul class="dropdown-menu">
+              <li>
+                <div id="google_translate_element"></div>
+                <script type="text/javascript">
+                  function googleTranslateElementInit() {
+                      new google.translate.TranslateElement({
+                          pageLanguage: 'en',
+                          includedLanguages: 'en,es,zh-CN,fr,de,pt,ja,ko,ru,ar,ur,hi,it,nl,sv,da,no,fi,pl,tr,th,vi,he,ms,id,tl,sw,cs,hu,uk,pa,te,fa,el,bg,ro,sr,sk,hr,lt,lv,et,mt',
+                          layout: google.translate.TranslateElement.InlineLayout.SIMPLE
+                      }, 'google_translate_element');
+                  }
+              </script>
+
+                <script type="text/javascript" src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+              </li>
+            </ul>
+          </li>
+
+
+
+            </ul>
+            <!-- /.list-unstyled -->
+          </div>
+          <!-- /.cnt-cart -->
+          <div class="clearfix"></div>
+        </div>
+        <!-- /.header-top-inner -->
+      </div>
+      <!-- /.container -->
+    </div>
+    <!-- /.header-top -->
+    <!-- ============================================== TOP MENU : END ============================================== -->
+
+    <!-- /.main-header -->
+
+    <!-- ============================================== NAVBAR ============================================== -->
+
+    <!-- /.header-nav -->
+    <!-- ============================================== NAVBAR : END ============================================== -->
+
+  </header>
+

@@ -1,0 +1,134 @@
+{% extends "baseTwo.html" %}
+{% block content %}
+<style>
+    .form-control{
+        border-radius: 0;
+        padding: 20px;
+        border: 1px solid black;
+    }
+</style>
+    <div class="container mt-5">
+        <h2 class="text-center mb-4">Contact Us</h2>
+
+        <div>
+            <span>Have a question that we can quickly answer?</span>
+            <p>Please feel free to contact us using the form below, or give us a call at our office.</p>
+
+            <ul>
+                <li style="list-style-type: disc;margin-left: 20px;color: #000;margin-bottom: 15px;"><a style="color: #000;border-bottom: 1px solid #000;" href="">Where is my order?</a></li>
+                <li style="list-style-type: disc;margin-left: 20px;color: #000;margin-bottom: 15px;"><a style="color: #000;border-bottom: 1px solid #000;" href="">Where are your stores located?</a></li>
+                <li style="list-style-type: disc;margin-left: 20px;color: #000;margin-bottom: 15px;"><a style="color: #000;border-bottom: 1px solid #000;" href="">How can I return or exchange my order?</a></li>
+            </ul>
+
+            <p>
+                Alternatively, please call <b> 03 016 543 034.</b> Please note this phone number is available from Monday to Saturday 9am – 5pm (PST) excluding Public Holidays. Please leave a message outside these hours and we will contact you as soon as possible.
+            </p>
+            <br>
+            <p>
+                To contact us via email please send email at   <b>waseemint.pk@gmail.com</b>  or fill out the following form:
+
+
+            </p>
+        </div>
+
+        {% if messages %}
+
+                {% for message in messages %}
+                    <div style="padding:15px;" class="bg-{{ message.tags }}">{{ message }}</div>
+                {% endfor %}
+        {% endif %}
+        <form method="post">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="id_name">Name *</label>
+                <input type="text" class="form-control" id="id_name" name="name" placeholder="Enter your name" value="{{ form.name.value|default:'' }}" required>
+                {% if form.name.errors %}
+                    <div class="text-danger">
+                        {% for error in form.name.errors %}
+                            <p>{{ error }}</p>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <label for="id_mobile">Mobile *</label>
+                    <input type="tel" class="form-control" id="id_mobile" name="mobile" placeholder="Enter your phone number" value="{{ form.mobile.value|default:'' }}" required>
+                    {% if form.mobile.errors %}
+                        <div class="text-danger">
+                            {% for error in form.mobile.errors %}
+                                <p>{{ error }}</p>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+                </div>
+                <div class="col-md-6">
+                    <label for="id_email">Email *</label>
+                    <input type="email" class="form-control" id="id_email" name="email" placeholder="Enter your email address" value="{{ form.email.value|default:'' }}" required>
+                    {% if form.email.errors %}
+                        <div class="text-danger">
+                            {% for error in form.email.errors %}
+                                <p>{{ error }}</p>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="id_order_number">Order Number</label>
+                <input type="text" class="form-control" id="id_order_number" name="order_number" placeholder="Enter your order number" value="{{ form.order_number.value|default:'' }}">
+                {% if form.order_number.errors %}
+                    <div class="text-danger">
+                        {% for error in form.order_number.errors %}
+                            <p>{{ error }}</p>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            </div>
+            <div class="form-group">
+                <label for="id_question">My Question *</label>
+                <select class="form-control" id="id_question" name="question" required>
+                    <option value="">Select a question</option>
+                    <option value="tracking" {% if form.question.value == 'tracking' %}selected{% endif %}>I need help tracking my order</option>
+                    <option value="exchange" {% if form.question.value == 'exchange' %}selected{% endif %}>I want to return or Exchange my Order</option>
+                    <option value="payment" {% if form.question.value == 'payment' %}selected{% endif %}>I can't checkout with payment method</option>
+                    <option value="sale" {% if form.question.value == 'sale' %}selected{% endif %}>I have a product of sale inquiry</option>
+                    <option value="login" {% if form.question.value == 'login' %}selected{% endif %}>Can you help me with account login</option>
+                    <option value="other" {% if form.question.value == 'other' %}selected{% endif %}>Other</option>
+                </select>
+                {% if form.question.errors %}
+                    <div class="text-danger">
+                        {% for error in form.question.errors %}
+                            <p>{{ error }}</p>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            </div>
+            <div class="form-group">
+                <label for="id_message">Message</label>
+                <textarea class="form-control" id="id_message" name="message" rows="3">{{ form.message.value|default:'' }}</textarea>
+                {% if form.message.errors %}
+                    <div class="text-danger">
+                        {% for error in form.message.errors %}
+                            <p>{{ error }}</p>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            </div>
+            <style>
+                .cont_btn:hover{
+                    background: #000 !important;
+                    color: #fff;
+                    font-weight: bold;
+                    transition: background 0.3s ease;
+                }
+            </style>
+
+                <div class="d-grid" style="display: block;width: 100%;">
+                    <button type="submit" class="cont_btn" style="display: block;width: 100%;background: transparent;border: 1px solid black;border-radius: 0;padding: 15px;font-weight: bold;">Send Message</button>
+                </div>
+
+        </form>
+    </div>
+    <br><br><br>
+{% endblock content %}
